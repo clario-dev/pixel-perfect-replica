@@ -28,3 +28,6 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Product names, categories and UGX prices live in src/data/products.ts; leave price undefined to show "Request a Quote" — single editable source for the catalogue.
+- All ordering goes through WhatsApp links built in src/lib/whatsapp.ts; no checkout or payments.
