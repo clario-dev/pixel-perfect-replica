@@ -31,3 +31,4 @@ use the editor.
 
 - Product names, categories and UGX prices live in src/data/products.ts; leave price undefined to show "Request a Quote" — single editable source for the catalogue.
 - All ordering goes through WhatsApp links built in src/lib/whatsapp.ts; no checkout or payments.
+- Homepage scroll animations use a route-scoped IntersectionObserver and CSS, with visible content without JavaScript and a reduced-motion fallback, to avoid animation dependencies.

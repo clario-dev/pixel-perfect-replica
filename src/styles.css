@@ -121,3 +121,64 @@
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: none; }
 }
+
+/* Home-only motion: content stays visible without JavaScript. */
+.home-motion > section:first-child .fade-up:first-child {
+  animation: home-entrance 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.home-motion > section:first-child img.fade-up {
+  animation: home-photo-entrance 1.3s cubic-bezier(0.16, 1, 0.3, 1) both,
+    home-photo-float 8s ease-in-out 1.3s infinite;
+  transform-origin: center;
+}
+.home-motion .motion-pending {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 850ms ease, transform 850ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.home-motion .motion-visible {
+  opacity: 1;
+  transform: none;
+}
+.home-motion .motion-visible .grid > *,
+.home-motion .motion-visible.grid > * {
+  animation: home-entrance 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.home-motion .motion-visible .grid > :nth-child(2),
+.home-motion .motion-visible.grid > :nth-child(2) { animation-delay: 100ms; }
+.home-motion .motion-visible .grid > :nth-child(3),
+.home-motion .motion-visible.grid > :nth-child(3) { animation-delay: 200ms; }
+.home-motion .motion-visible .grid > :nth-child(4) { animation-delay: 300ms; }
+.home-motion .motion-visible .grid > :nth-child(5) { animation-delay: 400ms; }
+.home-motion .motion-visible .grid > :nth-child(6) { animation-delay: 500ms; }
+.home-motion figure {
+  transition: transform 350ms ease, box-shadow 350ms ease;
+}
+@media (hover: hover) {
+  .home-motion figure:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-soft);
+  }
+}
+@keyframes home-entrance {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes home-photo-entrance {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes home-photo-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-up,
+  .home-motion *,
+  .home-motion .motion-pending {
+    animation: none !important;
+    transition: none !important;
+  }
+  .home-motion .motion-pending { opacity: 1; transform: none; }
+}
