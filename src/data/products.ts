@@ -104,7 +104,7 @@ export const gifts: Product[] = giftCategories.map((c, i) => ({
   id: `gift-${i}`,
   name: c === "Valentine's Day" ? "Valentine's Day Gift" : c.replace(/s$/, ""),
   category: c,
-  description: giftDescriptions[c],
+  description: giftDescriptions[c] ?? "Beautifully presented gifts for every occasion.",
   image: giftPackaging,
   alt: `${c} gift packaging with burgundy ribbon`,
   featured: i === 0,
