@@ -134,7 +134,7 @@ export function PageHero({ eyebrow, title, text, image }: { eyebrow: string; tit
   );
 }
 
-export function ProductCard({ product, cta = "Order on WhatsApp" }: { product: Product; cta?: string }) {
+export function ProductCard({ product, cta = "Order on WhatsApp" }: { product: Product; cta?: string | undefined }) {
   return (
     <article className="group flex flex-col overflow-hidden rounded-3xl bg-card shadow-card transition duration-300 hover:-translate-y-1 hover:shadow-soft">
       <div className="aspect-square overflow-hidden bg-muted">
