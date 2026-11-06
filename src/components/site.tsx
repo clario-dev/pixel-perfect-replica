@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Menu, X, MapPin, MessageCircle, Instagram, Facebook, Music2 } from "lucide-react";
-import logo from "@/assets/shami-logo.png.asset.json";
+import logo from "@/assets/shami-logo.png";
 import { WHATSAPP_DISPLAY, whatsappLink, productMessage, formatUGX } from "@/lib/whatsapp";
 import type { Product } from "@/data/products";
 
@@ -35,7 +35,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2 sm:px-6">
         <Link to="/" className="flex items-center gap-3" aria-label="Shami Cakes & Gifts Centre home">
-          <img src={logo.url} alt="Shami Cakes & Gifts Centre logo" className="h-14 w-14 rounded-full" width={56} height={56} />
+          <img src={logo} alt="Shami Cakes & Gifts Centre logo" className="h-14 w-14 rounded-full" width={56} height={56} />
           <span className="hidden leading-tight sm:block">
             <span className="block font-serif text-2xl font-bold text-primary">SHAMI</span>
             <span className="block text-[0.65rem] uppercase tracking-[0.2em] text-muted-foreground">Cakes & Gifts Centre</span>
@@ -76,7 +76,7 @@ export function SiteFooter() {
     <footer className="bg-primary text-primary-foreground">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-4">
         <div className="md:col-span-2">
-          <img src={logo.url} alt="Shami logo" className="mb-4 h-20 w-20 rounded-full" width={80} height={80} loading="lazy" />
+          <img src={logo} alt="Shami logo" className="mb-4 h-20 w-20 rounded-full" width={80} height={80} loading="lazy" />
           <p className="font-serif text-3xl font-bold">SHAMI</p>
           <p className="text-sm uppercase tracking-[0.2em] text-primary-foreground/70">Cakes & Gifts Centre</p>
           <p className="mt-4 font-serif text-xl italic text-blush">"Making Every Celebration Sweeter."</p>

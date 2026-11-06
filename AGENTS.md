@@ -33,3 +33,4 @@ use the editor.
 - All ordering goes through WhatsApp links built in src/lib/whatsapp.ts; no checkout or payments.
 - Homepage scroll animations use a route-scoped IntersectionObserver and CSS, with visible content without JavaScript and a reduced-motion fallback, to avoid animation dependencies.
 - Homepage photo slideshows share one route-level timer and reusable layered-image view so hero, category and gallery transitions stay synchronized; product-card images remain tied to their products.
+- Keep the site logo as a bundled image in the repository so exported code and non-Lovable hosting do not depend on Lovable asset-serving paths.
