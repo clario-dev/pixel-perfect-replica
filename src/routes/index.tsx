@@ -1,8 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
-import { MapPin, Heart, Sparkles, Gift, Clock, Star, Instagram } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { MapPin, Heart, Sparkles, Gift, Clock, Star, Instagram, Pause, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { images, allProducts, cakes, bouquets } from "@/data/products";
 import { ProductCard, WhatsAppButton, CtaBand, seo } from "@/components/site";
+import { HomeSlideshow } from "@/components/home-slideshow";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/")({
   head: () => ({ meta: seo("Shami Cakes & Gifts Centre | Cakes, Bouquets & Gifts in Kayunga", "Handcrafted birthday cakes, money bouquets, flower bouquets and gift packaging in Kayunga, Uganda. Order easily on WhatsApp.") }),
@@ -13,6 +15,16 @@ const categories = [
   { title: "Delicious Cakes", text: "Handcrafted cakes for every celebration.", image: images.chocolateCake, to: "/cakes" as const },
   { title: "Beautiful Flower Bouquets", text: "Roses, mixed blooms and money bouquets.", image: images.roseBouquet, to: "/bouquets" as const },
   { title: "Premium Gift Packaging", text: "Luxury boxes, bags and ribbon wrapping.", image: images.giftPackaging, to: "/gifts" as const },
+];
+
+const homeSlides = [
+  { src: images.heroImg, alt: "Birthday cake with strawberries beside flowers and a gift box" },
+  { src: images.roseBouquet, alt: "Pink roses and mixed flowers wrapped with ribbon" },
+  { src: images.chocolateCake, alt: "Chocolate drip cake with fresh strawberries" },
+  { src: images.moneyBouquet, alt: "Handcrafted money bouquet" },
+  { src: images.giftPackaging, alt: "Elegant gift packaging with burgundy ribbons" },
+  { src: images.weddingCake, alt: "Tiered wedding cake with pink roses" },
+  { src: images.cupcakes, alt: "Pink and cream frosted cupcakes" },
 ];
 
 const reasons = [
@@ -32,6 +44,23 @@ const testimonials = [
 
 function Home() {
   const homeRef = useRef<HTMLDivElement>(null);
+  const [step, setStep] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(preference.matches);
+    update();
+    preference.addEventListener("change", update);
+    return () => preference.removeEventListener("change", update);
+  }, []);
+  useEffect(() => {
+    if (paused || reducedMotion) return;
+    const timer = window.setInterval(() => {
+      if (!document.hidden) setStep((current) => current + 1);
+    }, 4000);
+    return () => window.clearInterval(timer);
+  }, [paused, reducedMotion]);
   useEffect(() => {
     const home = homeRef.current;
     if (!home || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
@@ -72,7 +101,15 @@ function Home() {
               <WhatsAppButton message="Hello Shami! I would like to place an order." variant="outline">Order on WhatsApp</WhatsAppButton>
             </div>
           </div>
-          <img src={images.heroImg} alt="Elegant pink birthday cake beside a rose bouquet and burgundy gift box" width={1600} height={1104} className="fade-up w-full rounded-[2rem] object-cover shadow-soft" />
+          <div className="relative">
+            <HomeSlideshow slides={homeSlides} step={step} eager className="aspect-[1600/1104] rounded-[2rem] shadow-soft" />
+            <div className="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-card/95 p-2 shadow-card">
+              <Button size="icon" variant="ghost" className="rounded-full" aria-label="Previous photo" title="Previous photo" onClick={() => setStep((current) => current + homeSlides.length - 1)}><ChevronLeft /></Button>
+              <span className="min-w-10 text-center text-sm font-semibold text-primary">{step % homeSlides.length + 1} / {homeSlides.length}</span>
+              <Button size="icon" variant="ghost" className="rounded-full" aria-label={paused || reducedMotion ? "Play slideshow" : "Pause slideshow"} title={paused || reducedMotion ? "Play slideshow" : "Pause slideshow"} onClick={() => { setPaused(!(paused || reducedMotion)); setReducedMotion(false); }}>{paused || reducedMotion ? <Play /> : <Pause />}</Button>
+              <Button size="icon" variant="ghost" className="rounded-full" aria-label="Next photo" title="Next photo" onClick={() => setStep((current) => current + 1)}><ChevronRight /></Button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -85,7 +122,10 @@ function Home() {
       <section className="mx-auto grid max-w-7xl gap-6 px-6 md:grid-cols-3">
         {categories.map((c) => (
           <Link key={c.title} to={c.to} className="group relative overflow-hidden rounded-3xl shadow-card">
-            <img src={c.image} alt={c.title} loading="lazy" width={1024} height={1024} className="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-105" />
+            <HomeSlideshow step={step} className="aspect-[4/5]" slides={c.to === "/cakes"
+              ? [homeSlides[2], homeSlides[5], homeSlides[6], homeSlides[0]].filter((slide) => slide !== undefined)
+              : c.to === "/bouquets" ? [homeSlides[1], homeSlides[3]].filter((slide) => slide !== undefined)
+              : [{ src: c.image, alt: c.title }]} />
             <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-card/92 p-5 backdrop-blur">
               <h3 className="text-2xl text-primary">{c.title}</h3>
               <p className="text-sm text-muted-foreground">{c.text}</p>
@@ -145,8 +185,8 @@ function Home() {
       <section className="mx-auto max-w-7xl px-6">
         <div className="mb-8 flex items-center justify-center gap-2 text-primary"><Instagram className="h-5 w-5" /><h2 className="text-3xl">Follow Our Sweet Journey</h2></div>
         <div className="grid grid-cols-3 gap-3 md:grid-cols-6">
-          {[images.heroImg, images.moneyBouquet, images.cupcakes, images.roseBouquet, images.giftPackaging, images.weddingCake].map((src, i) => (
-            <img key={i} src={src} alt="Shami creation from our social gallery" loading="lazy" width={300} height={300} className="aspect-square w-full rounded-2xl object-cover transition hover:opacity-80" />
+          {Array.from({ length: 6 }, (_, i) => (
+            <HomeSlideshow key={i} slides={homeSlides} step={step + i} className="aspect-square rounded-2xl" />
           ))}
         </div>
       </section>
