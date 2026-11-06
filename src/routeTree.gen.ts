@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as BouquetsRouteImport } from './routes/bouquets'
+import { Route as CakesRouteImport } from './routes/cakes'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as CustomOrdersRouteImport } from './routes/custom-orders'
+import { Route as GiftsRouteImport } from './routes/gifts'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BouquetsRoute = BouquetsRouteImport.update({
+  id: '/bouquets',
+  path: '/bouquets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CakesRoute = CakesRouteImport.update({
+  id: '/cakes',
+  path: '/cakes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomOrdersRoute = CustomOrdersRouteImport.update({
+  id: '/custom-orders',
+  path: '/custom-orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiftsRoute = GiftsRouteImport.update({
+  id: '/gifts',
+  path: '/gifts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/bouquets': typeof BouquetsRoute
+  '/cakes': typeof CakesRoute
+  '/contact': typeof ContactRoute
+  '/custom-orders': typeof CustomOrdersRoute
+  '/gifts': typeof GiftsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/bouquets': typeof BouquetsRoute
+  '/cakes': typeof CakesRoute
+  '/contact': typeof ContactRoute
+  '/custom-orders': typeof CustomOrdersRoute
+  '/gifts': typeof GiftsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/bouquets': typeof BouquetsRoute
+  '/cakes': typeof CakesRoute
+  '/contact': typeof ContactRoute
+  '/custom-orders': typeof CustomOrdersRoute
+  '/gifts': typeof GiftsRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/bouquets'
+    | '/cakes'
+    | '/contact'
+    | '/custom-orders'
+    | '/gifts'
+    | '/sitemap.xml'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/bouquets'
+    | '/cakes'
+    | '/contact'
+    | '/custom-orders'
+    | '/gifts'
+    | '/sitemap.xml'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/bouquets'
+    | '/cakes'
+    | '/contact'
+    | '/custom-orders'
+    | '/gifts'
+    | '/sitemap.xml'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  BouquetsRoute: typeof BouquetsRoute
+  CakesRoute: typeof CakesRoute
+  ContactRoute: typeof ContactRoute
+  CustomOrdersRoute: typeof CustomOrdersRoute
+  GiftsRoute: typeof GiftsRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bouquets': {
+      id: '/bouquets'
+      path: '/bouquets'
+      fullPath: '/bouquets'
+      preLoaderRoute: typeof BouquetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cakes': {
+      id: '/cakes'
+      path: '/cakes'
+      fullPath: '/cakes'
+      preLoaderRoute: typeof CakesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom-orders': {
+      id: '/custom-orders'
+      path: '/custom-orders'
+      fullPath: '/custom-orders'
+      preLoaderRoute: typeof CustomOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gifts': {
+      id: '/gifts'
+      path: '/gifts'
+      fullPath: '/gifts'
+      preLoaderRoute: typeof GiftsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  BouquetsRoute: BouquetsRoute,
+  CakesRoute: CakesRoute,
+  ContactRoute: ContactRoute,
+  CustomOrdersRoute: CustomOrdersRoute,
+  GiftsRoute: GiftsRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
