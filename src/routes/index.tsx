@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 import { MapPin, Heart, Sparkles, Gift, Clock, Star, Instagram } from "lucide-react";
 import { images, allProducts, cakes, bouquets } from "@/data/products";
 import { ProductCard, WhatsAppButton, CtaBand, seo } from "@/components/site";
@@ -30,10 +31,34 @@ const testimonials = [
 ];
 
 function Home() {
+  const homeRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const home = homeRef.current;
+    if (!home || window.matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("motion-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
+
+    const sections = home.querySelectorAll(":scope > section:not(:first-child)");
+    sections.forEach((section) => {
+      section.classList.add("motion-pending");
+      observer.observe(section);
+    });
+    return () => {
+      observer.disconnect();
+      sections.forEach((section) => section.classList.remove("motion-pending", "motion-visible"));
+    };
+  }, []);
   const featured = allProducts.filter((p) => p.featured).slice(0, 6);
   const best = [...cakes, ...bouquets].filter((p) => p.bestSeller).slice(0, 4);
   return (
-    <>
+    <div ref={homeRef} className="home-motion">
       <section className="relative overflow-hidden bg-blush-gradient">
         <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-14 md:grid-cols-[1fr_1.1fr] md:py-24">
           <div className="fade-up">
@@ -127,6 +152,6 @@ function Home() {
       </section>
 
       <CtaBand title="Ready to make someone smile?" text="Tell us what you're celebrating and we'll create something beautiful for you." message="Hello Shami! I would like to place an order." />
-    </>
+    </div>
   );
 }
