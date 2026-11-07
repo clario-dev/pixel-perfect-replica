@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { MessageCircle, ImagePlus, CheckCircle2 } from "lucide-react";
-import { PageHero, seo } from "@/components/site";
+import { ImagePlus, CheckCircle2 } from "lucide-react";
+import { PageHero, WhatsAppIcon, seo } from "@/components/site";
 import { customOrderMessage, whatsappLink } from "@/lib/whatsapp";
 import { images } from "@/data/products";
 
@@ -76,7 +76,7 @@ function CustomOrders() {
             </p>
           )}
           <button type="submit" className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-6 py-4 text-sm font-semibold text-whatsapp-foreground transition hover:opacity-90">
-            <MessageCircle className="h-4 w-4" /> Send Request via WhatsApp
+            <WhatsAppIcon className="h-5 w-5" /> Send Request via WhatsApp
           </button>
         </form>
       </section>

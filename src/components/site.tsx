@@ -1,7 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Menu, X, MapPin, MessageCircle, Instagram } from "lucide-react";
+import { Menu, X, MapPin, Instagram } from "lucide-react";
 import logo from "@/assets/shami-logo.png";
+import waLogo from "@/assets/whatsapp-logo.png";
+
+export function WhatsAppIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return <img src={waLogo} alt="" aria-hidden className={`${className} object-contain`} width={128} height={128} />;
+}
 import { WHATSAPP_DISPLAY, whatsappLink, productMessage, formatUGX } from "@/lib/whatsapp";
 import type { Product } from "@/data/products";
 
@@ -24,7 +29,7 @@ export function WhatsAppButton({ message, children, variant = "primary", classNa
   return (
     <a href={whatsappLink(message)} target="_blank" rel="noopener noreferrer"
       className={`inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 hover:-translate-y-0.5 ${styles} ${className}`}>
-      <MessageCircle className="h-4 w-4" aria-hidden /> {children}
+      <WhatsAppIcon className="h-5 w-5" /> {children}
     </a>
   );
 }
@@ -101,7 +106,7 @@ export function SiteFooter() {
           <p className="mb-4 font-serif text-xl">Contact</p>
           <p className="flex items-center gap-2 text-sm text-primary-foreground/80"><MapPin className="h-4 w-4" /> Kayunga District, Uganda</p>
           <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="mt-2 flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-blush">
-            <MessageCircle className="h-4 w-4" /> WhatsApp: {WHATSAPP_DISPLAY}
+            <WhatsAppIcon /> WhatsApp: {WHATSAPP_DISPLAY}
           </a>
         </div>
       </div>
@@ -115,7 +120,7 @@ export function FloatingWhatsApp() {
     <a href={whatsappLink("Hello Shami! I would like to place an order.")} target="_blank" rel="noopener noreferrer"
       aria-label="Chat with Shami on WhatsApp"
       className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-whatsapp-foreground shadow-soft transition hover:scale-110">
-      <MessageCircle className="h-7 w-7" />
+      <WhatsAppIcon className="h-9 w-9" />
     </a>
   );
 }

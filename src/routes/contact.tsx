@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
-import { MapPin, MessageCircle } from "lucide-react";
-import { WhatsAppButton, seo } from "@/components/site";
+import { MapPin } from "lucide-react";
+import { WhatsAppButton, WhatsAppIcon, seo } from "@/components/site";
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/contact")({
@@ -29,7 +29,7 @@ function Contact() {
         <div className="space-y-6 rounded-3xl bg-blush-gradient p-8 shadow-card">
           <h2 className="text-3xl text-primary">Shami Cakes & Gifts Centre</h2>
           <p className="flex items-center gap-3 text-primary"><MapPin className="h-5 w-5 text-rose" /> Kayunga District, Uganda</p>
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-primary hover:text-rose"><MessageCircle className="h-5 w-5 text-rose" /> WhatsApp: {WHATSAPP_DISPLAY}</a>
+          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-primary hover:text-rose"><WhatsAppIcon className="h-5 w-5" /> WhatsApp: {WHATSAPP_DISPLAY}</a>
           <WhatsAppButton message="Hello Shami!" variant="whatsapp">Chat on WhatsApp</WhatsAppButton>
           <iframe title="Map of Kayunga District, Uganda" src="https://www.google.com/maps?q=Kayunga,Uganda&output=embed" loading="lazy" className="h-64 w-full rounded-2xl border-0" />
         </div>
