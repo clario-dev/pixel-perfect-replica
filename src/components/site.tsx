@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
-import { Menu, X, MapPin, MessageCircle, Instagram, Facebook, Music2 } from "lucide-react";
+import { Menu, X, MapPin, MessageCircle, Instagram } from "lucide-react";
 import logo from "@/assets/shami-logo.png";
 import { WHATSAPP_DISPLAY, whatsappLink, productMessage, formatUGX } from "@/lib/whatsapp";
 import type { Product } from "@/data/products";
@@ -81,11 +81,12 @@ export function SiteFooter() {
           <p className="text-sm uppercase tracking-[0.2em] text-primary-foreground/70">Cakes & Gifts Centre</p>
           <p className="mt-4 font-serif text-xl italic text-blush">"Making Every Celebration Sweeter."</p>
           <div className="mt-6 flex gap-3">
-            {[Instagram, Facebook, Music2].map((Icon, i) => (
-              <a key={i} href="#" aria-label={["Instagram", "Facebook", "TikTok"][i]} className="rounded-full border border-primary-foreground/30 p-2 transition hover:bg-rose">
-                <Icon className="h-4 w-4" />
-              </a>
-            ))}
+            <a href="https://www.instagram.com/shami_cakes_and_gifts_centre" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="rounded-full border border-primary-foreground/30 p-2 transition hover:bg-rose">
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a href="https://www.tiktok.com/@shamicakesandgiftscentre" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="rounded-full border border-primary-foreground/30 p-2 transition hover:bg-rose">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5" aria-hidden="true"><path d="M19.6 6.7a4.8 4.8 0 0 1-3.8-4.2V2h-3.4v13.6a2.9 2.9 0 1 1-2-2.7V9.4a6.3 6.3 0 1 0 5.4 6.2V8.7a8.2 8.2 0 0 0 3.8 1.2V6.7z"/></svg>
+            </a>
           </div>
         </div>
         <div>
