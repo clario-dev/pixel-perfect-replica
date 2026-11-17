@@ -5,6 +5,15 @@ import cupcakes from "@/assets/cupcakes.jpg";
 import roseBouquet from "@/assets/rose-bouquet.jpg";
 import moneyBouquet from "@/assets/money-bouquet.jpg";
 import giftPackaging from "@/assets/gift-packaging.jpg";
+import chocolateDripDelight from "@/assets/chocolate-drip-delight.webp.asset.json";
+import princessSofia from "@/assets/princess-sofia-cake.webp.asset.json";
+import pinkSunshineRoses from "@/assets/pink-sunshine-roses-cake.webp.asset.json";
+import lavenderLuxury from "@/assets/lavender-luxury-cake.webp.asset.json";
+import emeraldElegance from "@/assets/emerald-elegance-cake.webp.asset.json";
+import royalBlueRose from "@/assets/royal-blue-rose-cake.webp.asset.json";
+import pinkChocolateDrip from "@/assets/pink-chocolate-drip-cake.webp.asset.json";
+import birthdayQueen from "@/assets/birthday-queen-cake.webp.asset.json";
+import goldenBlossom from "@/assets/golden-blossom-cake.png.asset.json";
 
 export const images = { heroImg, weddingCake, chocolateCake, cupcakes, roseBouquet, moneyBouquet, giftPackaging };
 
@@ -39,6 +48,24 @@ export const giftCategories = [
 ];
 
 export const cakes: Product[] = [
+  { id: "chocolate-drip-delight", name: "Chocolate Drip Delight", category: "Chocolate Cakes", price: 80000,
+    description: "White cream swirls, chocolate drip and chocolate pieces for a sweet celebration.", image: chocolateDripDelight.url, alt: "Chocolate Drip Delight cake with white cream and chocolate drip" },
+  { id: "princess-sofia-cake", name: "Princess Sofia Cake", category: "Birthday Cakes", price: 70000,
+    description: "A pink Princess Sofia birthday cake with character decorations and golden accents.", image: princessSofia.url, alt: "Pink Princess Sofia birthday cake with princess decorations" },
+  { id: "pink-sunshine-roses-cake", name: "Pink Sunshine Roses Cake", category: "Birthday Cakes", price: 50000,
+    description: "Pink frosting with pink and yellow buttercream roses for a joyful birthday.", image: pinkSunshineRoses.url, alt: "Pink birthday cake topped with pink and yellow frosting roses" },
+  { id: "lavender-luxury-cake", name: "Lavender Luxury Cake", category: "Birthday Cakes", price: 70000,
+    description: "Lavender frosting, piped borders and golden details with a birthday message.", image: lavenderLuxury.url, alt: "Lavender birthday cake with gold pearls and piped frosting" },
+  { id: "emerald-elegance-cake", name: "Emerald Elegance Cake", category: "Birthday Cakes", price: 70000,
+    description: "Deep emerald frosting with white cream swirls and a golden birthday topper.", image: emeraldElegance.url, alt: "Emerald green birthday cake with white cream and gold topper" },
+  { id: "royal-blue-rose-cake", name: "Royal Blue Rose Cake", category: "Celebration Cakes", price: 40000,
+    description: "Royal blue frosting with cream roses, blue blossoms and a celebration message.", image: royalBlueRose.url, alt: "Royal blue celebration cake with white roses and blue flowers" },
+  { id: "pink-chocolate-drip-cake", name: "Pink Chocolate Drip Cake", category: "Chocolate Cakes", price: 35000,
+    description: "Pink and white frosting finished with chocolate drip and a birthday message.", image: pinkChocolateDrip.url, alt: "Pink and white birthday cake with chocolate drip" },
+  { id: "birthday-queen-cake", name: "Birthday Queen Cake", category: "Birthday Cakes", price: 35000,
+    description: "Pink frosting and cream rosettes with a Happy Birthday Queen message.", image: birthdayQueen.url, alt: "Pink Birthday Queen cake with cream rosettes" },
+  { id: "golden-blossom-cake", name: "Golden Blossom Cake", category: "Wedding Cakes", price: 800000,
+    description: "An elegant two-tier ivory cake with oversized blossoms and golden accents.", image: goldenBlossom.url, alt: "Two-tier ivory Golden Blossom cake with large flowers and gold decorations" },
   { id: "shami-sweet-cake", name: "SHAMI Sweet Cake", category: "Celebration Cakes", price: 50000, startingFrom: true, featured: true, bestSeller: true,
     description: "Beautifully crafted sweet cakes made to turn your celebrations into unforgettable memories.",
     image: heroImg, alt: "SHAMI Sweet Cake decorated with fresh strawberries and pink cream" },
@@ -111,3 +138,16 @@ export const gifts: Product[] = giftCategories.map((c, i) => ({
 }));
 
 export const allProducts = [...cakes, ...bouquets, ...gifts];
+
+export function productSlides(products: Product[]) {
+  const seen = new Set<string>();
+  return products.filter((product) => {
+    if (seen.has(product.image)) return false;
+    seen.add(product.image);
+    return true;
+  }).map((product) => ({ src: product.image, alt: product.alt }));
+}
+
+export const homeSlides = productSlides(allProducts);
+export const cakeSlides = productSlides(cakes);
+export const bouquetSlides = productSlides(bouquets);

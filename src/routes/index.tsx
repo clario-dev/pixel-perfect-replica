@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { MapPin, Heart, Sparkles, Gift, Clock, Star, Instagram, Pause, Play, ChevronLeft, ChevronRight } from "lucide-react";
-import { images, allProducts, cakes, bouquets } from "@/data/products";
+import { images, allProducts, cakes, bouquets, homeSlides, cakeSlides, bouquetSlides } from "@/data/products";
 import { ProductCard, WhatsAppButton, CtaBand, seo } from "@/components/site";
 import { HomeSlideshow } from "@/components/home-slideshow";
 import { Button } from "@/components/ui/button";
@@ -15,16 +15,6 @@ const categories = [
   { title: "Delicious Cakes", text: "Handcrafted cakes for every celebration.", image: images.chocolateCake, to: "/cakes" as const },
   { title: "Beautiful Flower Bouquets", text: "Roses, mixed blooms and money bouquets.", image: images.roseBouquet, to: "/bouquets" as const },
   { title: "Premium Gift Packaging", text: "Luxury boxes, bags and ribbon wrapping.", image: images.giftPackaging, to: "/gifts" as const },
-];
-
-const homeSlides = [
-  { src: images.heroImg, alt: "Birthday cake with strawberries beside flowers and a gift box" },
-  { src: images.roseBouquet, alt: "Pink roses and mixed flowers wrapped with ribbon" },
-  { src: images.chocolateCake, alt: "Chocolate drip cake with fresh strawberries" },
-  { src: images.moneyBouquet, alt: "Handcrafted money bouquet" },
-  { src: images.giftPackaging, alt: "Elegant gift packaging with burgundy ribbons" },
-  { src: images.weddingCake, alt: "Tiered wedding cake with pink roses" },
-  { src: images.cupcakes, alt: "Pink and cream frosted cupcakes" },
 ];
 
 const reasons = [
@@ -123,8 +113,8 @@ function Home() {
         {categories.map((c) => (
           <Link key={c.title} to={c.to} className="group relative overflow-hidden rounded-3xl shadow-card">
             <HomeSlideshow step={step} className="aspect-[4/5]" slides={c.to === "/cakes"
-              ? [homeSlides[2], homeSlides[5], homeSlides[6], homeSlides[0]].filter((slide) => slide !== undefined)
-              : c.to === "/bouquets" ? [homeSlides[1], homeSlides[3]].filter((slide) => slide !== undefined)
+              ? cakeSlides
+              : c.to === "/bouquets" ? bouquetSlides
               : [{ src: c.image, alt: c.title }]} />
             <div className="absolute inset-x-4 bottom-4 rounded-2xl bg-card/92 p-5 backdrop-blur">
               <h3 className="text-2xl text-primary">{c.title}</h3>
