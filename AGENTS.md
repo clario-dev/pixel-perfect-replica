@@ -35,3 +35,4 @@ use the editor.
 - Homepage photo slideshows share one route-level timer and reusable layered-image view so hero, category and gallery transitions stay synchronized; product-card images remain tied to their products.
 - Derive homepage and cake-category slideshow photos from the product catalogue, deduplicated by image URL, so new products appear automatically without a second image list.
 - Keep the site logo as a bundled image in the repository so exported code and non-Lovable hosting do not depend on Lovable asset-serving paths.
+- Keep product photos as bundled image files with direct imports so the Git repository and external hosting contain the actual images, not only CDN pointers.

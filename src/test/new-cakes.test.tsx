@@ -29,6 +29,12 @@ describe("uploaded cake catalogue", () => {
     expect(cakeSlides.some((slide) => slide.src === product?.image)).toBe(true);
   });
 
+  it.each(suppliedCakes)("serves %s from a bundled image instead of a Lovable CDN pointer", (name) => {
+    const product = cakes.find((cake) => cake.name === name);
+    expect(product?.image).toMatch(/\.(webp|png)(\?.*)?$/);
+    expect(product?.image).not.toContain("/__l5e/");
+  });
+
   it("automatically includes future products and deduplicates shared photos", () => {
     const future = { id: "future", name: "Future cake", category: "Birthday Cakes", description: "", image: "/future-cake.webp", alt: "Future cake" };
     const slides = productSlides([...cakes, future, { ...future, id: "future-copy" }]);
